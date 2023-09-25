@@ -4,10 +4,16 @@ object tpIntegrador {
 	method jugar() {
 		tablero.setearTablero()
 		game.boardGround("background.jpg")
-		game.start()
 		game.addVisual(personaje)
-		
-		keyboard.d().onPressDo { personaje.movete() }
+				
+		keyboard.d().onPressDo { personaje.moverDerecha() }
+		keyboard.w().onPressDo { 
+			game.onTick(70,"salto",{ personaje.subir() })
+			game.schedule(300, { game.removeTickEvent("salto") })
+		}
+		keyboard.a().onPressDo { personaje.moverIzquierda() }
+		keyboard.s().onPressDo { personaje.bajar() }
+		game.start()
 	}
 }
 
@@ -25,11 +31,18 @@ object personaje {
 	var property position = game.origin()
 	method image() = "personaje.png";
 	
-	method movete() {
-    const x = 0.randomUpTo(game.width()).truncate(0)
-    const y = 0.randomUpTo(game.height()).truncate(0)
-
-    position = game.at(x,y) 
-  }
+	method subir(){
+		position = position.up(1)
+		
+	}
+	method bajar(){
+		position = position.down(1)
+	}
+	method moverIzquierda() {
+		position = position.left(1)
+	}
+	method moverDerecha(){
+		position = position.right(1)
+	}
 	
 }
