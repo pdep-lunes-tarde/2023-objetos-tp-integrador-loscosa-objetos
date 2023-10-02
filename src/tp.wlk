@@ -6,25 +6,28 @@ object tpIntegrador {
 		game.boardGround("background.jpg")
 		game.addVisual(plataforma)
 		game.addVisual(personaje)
-		
+		game.whenCollideDo(plataforma,{})
 		game.onTick(30,"gravity",{personaje.gravedad()})		
 		keyboard.d().onPressDo {
 			game.onTick(8,"right",{personaje.moverDerecha()})
 			game.schedule(90, {game.removeTickEvent("right")})
-			
 		}
+		
 		keyboard.w().onPressDo { 
 			game.onTick(8,"jump",{ personaje.subir() })
 			game.schedule(90, { game.removeTickEvent("jump") })
 		}
+		
 		keyboard.a().onPressDo { 
 			game.onTick(8,"left",{personaje.moverIzquierda()})
 			game.schedule(90, {game.removeTickEvent("left")})
 		}
+		
 		keyboard.s().onPressDo {
 			game.onTick(8,"down",{personaje.bajar()})
 			game.schedule(90,{game.removeTickEvent("down")})
 		}
+		
 		game.start()
 	}
 }
@@ -42,7 +45,7 @@ object tablero {
 object plataforma {
 	var property position = game.center()
 	
-	method image() = "plataforma.png"
+	method image() = "animation kirby/kirby walking fr1.png"
 }
 object personaje {
 	var property position = game.origin()
