@@ -5,7 +5,7 @@ object tpIntegrador {
 		tablero.setearTablero()
 		game.boardGround("background.jpg")
 		game.addVisual(personaje)
-		game.onTick(40,"gravity",{personaje.bajar()})		
+		game.onTick(14,"gravity",{personaje.actualizar()})		
 		keyboard.d().onPressDo { personaje.moverDerecha() }
 		keyboard.w().onPressDo { 
 			game.onTick(10,"jump",{ personaje.subir() })
@@ -28,7 +28,9 @@ object tablero {
 }
 
 object personaje {
-	var property position = game.center()
+	var property position = game.origin()
+	var verticalSpeed = 0	
+	
 	method image() = "personaje.png";
 	
 	method subir(){
@@ -42,8 +44,28 @@ object personaje {
 		position = game.at((position.x() - 1).max(0), position.y())
 	}
 	method moverDerecha(){
-		position = position.right(1)
+		position = game.at((position.x() + 1).min(18), position.y())
 	}
+	
+	
+	
+	method saltar() {
+        verticalSpeed = 10  
+    }
+
+    method actualizar() {
+        position = game.at(position.x(), position.y() - verticalSpeed)
+
+        if (position.y() < 10) { 
+            verticalSpeed = 0
+            position = game.at(position.x(), 0) 
+        } else {
+            verticalSpeed -= 0.1 
+        }
+    }
+	
+	
+
 	
 }
 /*

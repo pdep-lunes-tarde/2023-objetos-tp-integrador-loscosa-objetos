@@ -8,11 +8,5 @@ class Choque {
 	var property choqueSuelo = true;
 	
 	
-	method limiteEnX() {
-		
-		if(game.widht() < 0 ) {
-			
-		}
-	}
 		
 }
