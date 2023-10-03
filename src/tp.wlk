@@ -15,7 +15,7 @@ object tpIntegrador {
 		
 		keyboard.w().onPressDo { 
 			game.onTick(8,"jump",{ personaje.subir() })
-			game.schedule(90, { game.removeTickEvent("jump") })
+			game.schedule(90, { game.removeTickEvent("jump")})
 		}
 		
 		keyboard.a().onPressDo { 
@@ -45,7 +45,7 @@ object tablero {
 object plataforma {
 	var property position = game.center()
 	
-	method image() = "animation kirby/kirby walking fr1.png"
+	method image() = "plataforma.png"
 }
 object personaje {
 	var property position = game.origin()
@@ -53,11 +53,13 @@ object personaje {
 	const limiteInfDer = 185
 	const limiteSup = 119	
 	
-	method image() ="personaje.png";
-	
+	method image() {
+	if(verticalSpeed==0)
+	return "KirbyWalking/kirbyF1.png"
+	else return "KirbyWalking/kirbyJumpF1.png"
+	}
 	method subir(){
 		position = game.at(position.x(),(position.y() + 10).min(limiteSup))
-		
 	}
 	method bajar(){
 		position = game.at(position.x(), (position.y() - 10).max(0))
@@ -67,18 +69,14 @@ object personaje {
 	}
 	method moverDerecha(){
 		position = game.at((position.x() + 6).min(limiteInfDer), position.y())
-	
 	}
 	
     method gravedad() {
         position = game.at(position.x(), (position.y() - verticalSpeed).max(0))
-
-        if (position.y() > 0) { 
-            verticalSpeed = + 6
-             
-        } else {
-            verticalSpeed = 0 
-        }
+		if (position.y() > 0) { 
+            verticalSpeed = + 8
+             } 
+        else verticalSpeed = 0 
     }
 }
 
