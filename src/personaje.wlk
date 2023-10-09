@@ -3,27 +3,50 @@ import wollok.game.*
 class Personaje {
 	
 	var property position = game.origin()
+	//var vida = 1000;
+	//var mana = 0;
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	method image() = "personaje.png";
 	
 	method subir(){
-		position = position.up(1)
-		
+		if(position.y() < 9.5){
+			position = position.up(3.5)
+		}	
 	}
+	
 	method bajar(){
-		position = game.at(position.x(), (position.y() - 1).max(0))
+		if(position.y() > 0){
+			position = game.at(position.x(), (position.y() - 0.5))
+		}
 	}
+	
 	method moverIzquierda() {
-		position = game.at((position.x() - 1).max(0), position.y())
+		if(position.x() > 0){
+			position = game.at((position.x() - 1), position.y())
+		}
 	}
+	
 	method moverDerecha(){
-		position = game.at((position.x() + 1).min(18), position.y())
+		if(position.x() < (game.width() - 2)){
+			position = game.at((position.x() + 1), position.y())
+		}
+	}
+	
+	method actualizar(){
+		if(position.y() > 0){
+			self.caer()
+		}
+	}
+	
+	method caer(){
+		game.schedule(500, {self.bajar()})
+	}
+	
+	method inicializar(){
+		game.addVisual(self)
+		keyboard.d().onPressDo { self.moverDerecha() }
+		keyboard.w().onPressDo { self.subir() }
+		keyboard.a().onPressDo { self.moverIzquierda() }
+		keyboard.s().onPressDo { self.bajar() }
 	}
 }
