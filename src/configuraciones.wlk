@@ -1,8 +1,9 @@
 import wollok.game.*
 import plataforma.*
 
-object tablero {
-	method iniciarTablero(){
+object config {
+	
+	method configurarTablero() {
 		
 		const plataformaUno = new Plataforma()
 		
@@ -13,7 +14,11 @@ object tablero {
 		game.boardGround("imageBackgroundMap.jpg")
 		plataformaUno.inicializar()
 		game.onCollideDo(plataformaUno, {elemento => game.say(plataformaUno, "¡Cuidado!")})
+	}
+	
+	
+	method configurarTeclado() {
+		
 		
 	}
 }
-
