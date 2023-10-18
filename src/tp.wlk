@@ -31,16 +31,18 @@ object tpIntegrador {
 		
 		keyboard.enter().onPressDo{self.iniciarPelea()}
 		
+		
 		game.start()
 		
 	}
 	
 	method iniciarPelea(){
 		game.clear()
-		const personaje = new Personaje()
-		game.onTick(30,"gravity",{personaje.actualizar()})
-		game.onTick(160,"animations",{personaje.animaciones()})
-		personaje.inicializar()
+		plataformaCentral.crear()
+		bordes.crear()
+		game.onTick(30,"gravity",{robertoMecanico.actualizar()})
+		//game.onTick(160,"animations",{personaje.animaciones()})
+		robertoMecanico.inicializar()
 	}
 }
 
