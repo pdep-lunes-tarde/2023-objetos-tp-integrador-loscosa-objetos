@@ -40,9 +40,10 @@ object tpIntegrador {
 		game.clear()
 		plataformaCentral.crear()
 		bordes.crear()
+		config.agregarPersonajes()
+		config.configurarTeclado()
 		game.onTick(30,"gravity",{robertoMecanico.actualizar()})
 		//game.onTick(160,"animations",{personaje.animaciones()})
-		robertoMecanico.inicializar()
 	}
 }
 
