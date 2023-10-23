@@ -45,12 +45,10 @@ object tpIntegrador {
 		config.agregarPersonajes()
 		config.configurarTeclado()
 		game.onTick(30,"gravity",{robertoMecanico.actualizar()})
-		game.onTick(30, "apareceMoneda",{bordes.aparecerMoneda()})
-		game.schedule(500,{
-			game.removeTickEvent("apareceMoneda")
-			game.removeVisual(robertoMecanico)
-		})
+		game.onTick(300, "apareceMoneda",{bordes.aparecerMoneda()})
+		
+		}
 		//game.onTick(160,"animations",{personaje.animaciones()})
 	}
-}
+
 
