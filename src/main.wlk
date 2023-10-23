@@ -93,7 +93,13 @@ class Borde inherits Objeto {
 	override method puedePisarse() = false
 }
 
-
+class Moneda inherits Objeto{
+	var property valor
+	
+	method image() = "pared.jpg"
+	
+	override method puedePisarse() = true
+}
 
 
 

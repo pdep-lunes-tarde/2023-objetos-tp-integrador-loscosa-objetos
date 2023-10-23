@@ -1,5 +1,6 @@
 import wollok.game.*
 import main.*
+import main.*
 
 class Visual {
 
@@ -12,6 +13,7 @@ class Visual {
 	}
 
 }
+
 
 object plataformaCentral {
 
@@ -116,7 +118,6 @@ object bordes{
 		// ---------- Bordes Superiores ----------
 		
 		// ---------- Bordes Plataforma ----------
-		new Borde(position = game.at(5,5)),
 		new Borde(position = game.at(6,5)),
 		new Borde(position = game.at(7,5)),
 		new Borde(position = game.at(8,5)),
@@ -128,6 +129,16 @@ object bordes{
 	
 	method crear(){
 		bordes.forEach({borde => borde.crear()})
+	}
+	
+	method aparecerMoneda() {
+		const x = (0..game.width()-1).anyOne()
+		const y = (0..game.height()-1).anyOne()
+		game.addVisual( 
+			new Moneda(
+				valor = [1,5,10].anyOne(),
+				position = game.at(x,y))
+		)
 	}
 }
 

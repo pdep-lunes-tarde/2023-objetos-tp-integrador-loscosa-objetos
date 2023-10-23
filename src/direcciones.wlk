@@ -1,6 +1,6 @@
 object arriba {
 
-	method siguientePosicion(pos) = pos.up(3)
+	method siguientePosicion(pos) = pos.up(2.5)
 
 }
 

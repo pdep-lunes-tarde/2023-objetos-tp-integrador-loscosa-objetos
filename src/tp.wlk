@@ -32,6 +32,8 @@ object tpIntegrador {
 		keyboard.enter().onPressDo{self.iniciarPelea()}
 		
 		
+		
+		
 		game.start()
 		
 	}
@@ -43,6 +45,11 @@ object tpIntegrador {
 		config.agregarPersonajes()
 		config.configurarTeclado()
 		game.onTick(30,"gravity",{robertoMecanico.actualizar()})
+		game.onTick(30, "apareceMoneda",{bordes.aparecerMoneda()})
+		game.schedule(500,{
+			game.removeTickEvent("apareceMoneda")
+			game.removeVisual(robertoMecanico)
+		})
 		//game.onTick(160,"animations",{personaje.animaciones()})
 	}
 }
