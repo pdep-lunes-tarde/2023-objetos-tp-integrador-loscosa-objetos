@@ -92,27 +92,27 @@ object bordes{
 		// ---------- Bordes Derecha -----------
 		
 		// ---------- Bordes Superiores ----------
-		new Borde(position = game.at(0,11)),
-		new Borde(position = game.at(1,11)),
-		new Borde(position = game.at(2,11)),
-		new Borde(position = game.at(3,11)),
-		new Borde(position = game.at(4,11)),
-		new Borde(position = game.at(5,11)),
-		new Borde(position = game.at(6,11)),
-		new Borde(position = game.at(7,11)),
-		new Borde(position = game.at(8,11)),
-		new Borde(position = game.at(9,11)),
-		new Borde(position = game.at(10,11)),
-		new Borde(position = game.at(11,11)),
-		new Borde(position = game.at(12,11)),
-		new Borde(position = game.at(13,11)),
-		new Borde(position = game.at(14,11)),
-		new Borde(position = game.at(15,11)),
-		new Borde(position = game.at(16,11)),
-		new Borde(position = game.at(17,11)),
-		new Borde(position = game.at(18,11)),
-		new Borde(position = game.at(19,11)),
-		new Borde(position = game.at(20,11)),
+		new Borde(position = game.at(0,10)),
+		new Borde(position = game.at(1,10)),
+		new Borde(position = game.at(2,10)),
+		new Borde(position = game.at(3,10)),
+		new Borde(position = game.at(4,10)),
+		new Borde(position = game.at(5,10)),
+		new Borde(position = game.at(6,10)),
+		new Borde(position = game.at(7,10)),
+		new Borde(position = game.at(8,10)),
+		new Borde(position = game.at(9,10)),
+		new Borde(position = game.at(10,10)),
+		new Borde(position = game.at(11,10)),
+		new Borde(position = game.at(12,10)),
+		new Borde(position = game.at(13,10)),
+		new Borde(position = game.at(14,10)),
+		new Borde(position = game.at(15,10)),
+		new Borde(position = game.at(16,10)),
+		new Borde(position = game.at(17,10)),
+		new Borde(position = game.at(18,10)),
+		new Borde(position = game.at(19,10)),
+		new Borde(position = game.at(20,10)),
 		// ---------- Bordes Superiores ----------
 		
 		// ---------- Bordes Plataforma ----------
@@ -128,8 +128,17 @@ object bordes{
 	
 	method crear(){
 		bordes.forEach({borde => borde.crear()})
+		robertoMecanicoVidas.crear()
 	}
 }
+
+object robertoMecanicoVidas inherits Objeto (position = game.at(0,11))  {
+	
+	override method puedePisarse() = false
+	
+	method image() = "vidas-" + robertoMecanico.vidas().toString() + "corazon.png"
+}
+
 
 const imagenInicio = new Visual(image = "pantallaInicio.png")
 
