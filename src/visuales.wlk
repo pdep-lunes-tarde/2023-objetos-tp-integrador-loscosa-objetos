@@ -34,7 +34,7 @@ object plataformaCentral {
 }
 
 object bordes{
-	var rangoDeBordes = 0..20
+	//var rangoDeBordes = 0..20
 	
 	const bordes = [
 		
@@ -133,14 +133,14 @@ object bordes{
 		robertoMecanicoVidas.crear()
 	}
 	
-	method aparecerMoneda() {
-		const x = (0..game.width()-1).anyOne()
-		const y = (0..game.height()-1).anyOne()//asignamos una constante a cada insancia de moneda para poder controlar las instancias por separado
-		 const ulti = new Moneda( valor = [1,5,10].anyOne(), position = game.at(x,y))
-		game.addVisual(ulti)
-		game.schedule(500,{ game.removeVisual(ulti)}) //como la constante "ulti" referencia a "Moneda", cuando removemos "ulti", removemos el objeto al que se referencia.
-		
-	}
+//	method aparecerMoneda() {
+//		const x = (0..game.width()-1).anyOne()
+//		const y = (0..game.height()-1).anyOne()//asignamos una constante a cada insancia de moneda para poder controlar las instancias por separado
+//		 const ulti = new Moneda( valor = [1,5,10].anyOne(), position = game.at(x,y))
+//		game.addVisual(ulti)
+//		game.schedule(500,{ game.removeVisual(ulti)}) //como la constante "ulti" referencia a "Moneda", cuando removemos "ulti", removemos el objeto al que se referencia.
+//		
+//	}
 }
 
 object robertoMecanicoVidas inherits Objeto (position = game.at(0,11))  {

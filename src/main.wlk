@@ -128,14 +128,14 @@ object robertoMecanico inherits Personaje {
 	method pegar() {
 		estaPegando = true
 		self.area()
-		if (self.areaColision().contains(personajeDos.position().x())) {
-			self.perderVida()
+		if (self.areaColision().contains(gordoMortero.position().x())) {
+			gordoMortero.perderVida()
 		}
 	}
 
 }
 
-object personajeDos inherits Personaje {
+object gordoMortero inherits Personaje {
 
 	override method position() = game.at(18, 0)
 
@@ -171,17 +171,15 @@ class Plataforma inherits Objeto {
 class Borde inherits Objeto {
 
 	override method puedePisarse() = false
-<<<<<<< HEAD
-=======
 }
 
-class Moneda inherits Objeto{
-	var property valor
-	
-	method image() = "pared.jpg"
-	
-	override method puedePisarse() = true
-}
+//class Moneda inherits Objeto{
+//	var property valor
+//	
+//	method image() = "pared.jpg"
+//	
+//	override method puedePisarse() = true
+//}
 
 
 
@@ -321,7 +319,6 @@ class Personaje2 {
 			game.getObjectsIn(proximaPosicion).forEach({ objeto => objeto.moverA(dir)})
 		}
 	}
->>>>>>> 856f5152a491f8f4c5ba8466e8e5867499a5999e
 
 }
 
