@@ -1,5 +1,0 @@
-import tpv1.*
-
-program juego {
-	tpIntegrador.iniciar()
-}
