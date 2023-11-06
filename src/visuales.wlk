@@ -131,6 +131,7 @@ object bordes{
 	method crear(){
 		bordes.forEach({borde => borde.crear()})
 		robertoMecanicoVidas.crear()
+		gordoMorteroVidas.crear()
 	}
 	
 //	method aparecerMoneda() {
@@ -147,9 +148,20 @@ object robertoMecanicoVidas inherits Objeto (position = game.at(0,11))  {
 	
 	override method puedePisarse() = false
 	
-	method image() = "vidas-" + robertoMecanico.vidas().toString() + "corazon.png"
+	method image() = "roberto_mecanico/vidasRoberto-" + robertoMecanico.vidas().toString() + "corazon.png"
+}
+
+object gordoMorteroVidas inherits Objeto (position = game.at(16,11))  {
+	
+	override method puedePisarse() = false
+	
+	method image() = "gordo_mortero/vidasGordo-" + gordoMortero.vidas().toString() + "corazon.png"
 }
 
 
 const imagenInicio = new Visual(image = "pantallaInicio.png")
+
+const imagenGanadoraRoberto = new Visual (image = "roberto_mecanico/robertoGanador.png")
+
+const imagenGanadoraGordo = new Visual (image = "gordo_mortero/gordoGanador.png")
 

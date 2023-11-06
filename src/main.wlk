@@ -4,7 +4,7 @@ import tp.*
 
 class Objeto {
 
-	var property position = game.origin()
+	var property position
 	var property puedePisarse = true
 
 	method crear() {
@@ -41,7 +41,7 @@ class ObjetoMovible inherits Objeto {
 }
 
 class Personaje inherits ObjetoMovible {
-	
+
 	var property estaSaltando = false
 	var property seMueveALaDerecha = false
 	var property seMueveALaIzquierda = false
@@ -86,7 +86,7 @@ class Personaje inherits ObjetoMovible {
 	}
 
 	method areaColision() = areaColision
-	
+
 	method animaciones() {
 		seMueveALaDerecha = false
 		seMueveALaIzquierda = false
@@ -96,25 +96,7 @@ class Personaje inherits ObjetoMovible {
 
 }
 
-object robertoMecanico inherits Personaje {
-	
-	
-	method image() {
-		
-		return if (self.estaSaltando()){
-			"roberto_mecanico/upPosition.png"			
-		}else if (self.seMueveALaDerecha()) {
-			"roberto_mecanico/rightPosition.png"
-		} else if (self.seMueveALaIzquierda()) {
-			"roberto_mecanico/leftPosition.png"
-		} else if (self.estaPegando()){
-			"roberto_mecanico/fightPosition.png"	
-		}
-		else {
-			"roberto_mecanico/originalPosition.png"
-		}
-	}
-	
+object robertoMecanico inherits Personaje (position = game.origin()) {
 
 	override method moverA(dir) {
 		const proximaPosicion = self.proximaPosicion(dir)
@@ -122,6 +104,20 @@ object robertoMecanico inherits Personaje {
 			position = proximaPosicion
 		} else {
 			game.getObjectsIn(proximaPosicion).forEach({ objeto => objeto.moverA(dir)})
+		}
+	}
+
+	method image() {
+		return if (self.estaSaltando()) {
+			"roberto_mecanico/upPosition.png"
+		} else if (self.seMueveALaDerecha()) {
+			"roberto_mecanico/rightPosition.png"
+		} else if (self.seMueveALaIzquierda()) {
+			"roberto_mecanico/leftPosition.png"
+		} else if (self.estaPegando()) {
+			"roberto_mecanico/fightPosition.png"
+		} else {
+			"roberto_mecanico/originalPosition.png"
 		}
 	}
 
@@ -131,15 +127,12 @@ object robertoMecanico inherits Personaje {
 		if (self.areaColision().contains(gordoMortero.position().x())) {
 			gordoMortero.perderVida()
 		}
+		game.sound("sounds/fightSound.mp3").play()
 	}
 
 }
 
-object gordoMortero inherits Personaje {
-
-	override method position() = game.at(18, 0)
-
-	method image() = "segundoPersonaje.png"
+object gordoMortero inherits Personaje (position = game.at(18, 0)) {
 
 	override method moverA(dir) {
 		const proximaPosicion = self.proximaPosicion(dir)
@@ -150,12 +143,33 @@ object gordoMortero inherits Personaje {
 		}
 	}
 
+	method image() {
+		return if (self.estaSaltando()) {
+			"gordo_mortero/upPosition.png"
+		} else if (self.seMueveALaDerecha()) {
+			"gordo_mortero/rightPosition.png"
+		} else if (self.seMueveALaIzquierda()) {
+			"gordo_mortero/leftPosition.png"
+		} else if (self.estaPegando()) {
+			"gordo_mortero/fightPosition.png"
+		} else {
+			"gordo_mortero/originalPosition.png"
+		}
+	}
+
+	override method area() {
+		areaColision = (position.x() - 2 .. position.x() + 1)
+	}
+
+	override method areaColision() = areaColision
+
 	method pegar() {
 		estaPegando = true
 		self.area()
 		if (self.areaColision().contains(robertoMecanico.position().x())) {
 			robertoMecanico.perderVida()
 		}
+		game.sound("sounds/fightSound.mp3").play()
 	}
 
 }
@@ -171,6 +185,7 @@ class Plataforma inherits Objeto {
 class Borde inherits Objeto {
 
 	override method puedePisarse() = false
+
 }
 
 //class Moneda inherits Objeto{
@@ -180,148 +195,6 @@ class Borde inherits Objeto {
 //	
 //	override method puedePisarse() = true
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Personaje2 {
-
-	var property position = game.origin()
-	var property estaSaltando = false
-	var property seMueveALaDerecha = false
-	var property seMueveALaIzquierda = false
-
-	// var vida = 1000;
-	// var mana = 0;
-	method image() {
-		return if (self.estaSaltando()) {
-			"roberto_mecanico/upPosition.png"
-		} else if (self.seMueveALaDerecha()) {
-			"roberto_mecanico/rightPosition.png"
-		} else if (self.seMueveALaIzquierda()) {
-			"roberto_mecanico/leftPosition.png"
-		} else {
-			"roberto_mecanico/originalPosition.png"
-		}
-	}
-
-	method subir() {
-		self.moverA(arriba)
-	}
-
-	method bajar() {
-		if (position.y() > 0) {
-			position = game.at(position.x(), (position.y() - 0.5))
-		}
-	}
-
-	method moverIzquierda() {
-		if (position.x() > 0) {
-			position = game.at((position.x() - 1), position.y())
-		}
-	}
-
-	method moverDerecha() {
-		if (position.x() < (game.width() - 2)) {
-			position = game.at((position.x() + 1), position.y())
-		}
-	}
-
-	method actualizar() {
-		if (position.y() > 0) {
-			self.caer()
-		}
-		if (position.y() == 0) {
-			estaSaltando = false
-		}
-	}
-
-	method animaciones() {
-		seMueveALaDerecha = false
-		seMueveALaIzquierda = false
-		estaSaltando = false
-	}
-
-	method caer() {
-		game.schedule(500, { self.bajar()})
-	}
-
-	method choqueConPlataforma() {
-		position = game.at(0, 0)
-	}
-
-	method inicializar() {
-		game.addVisual(self)
-		keyboard.d().onPressDo{ self.moverDerecha()
-			seMueveALaDerecha = true
-		}
-		keyboard.w().onPressDo{ self.subir()
-			estaSaltando = true
-		}
-		keyboard.a().onPressDo{ self.moverIzquierda()
-			seMueveALaIzquierda = true
-		}
-		keyboard.s().onPressDo{ self.bajar()}
-	}
-
-	method puedeMoverseA(posicion) = self.todosPuedenPisarse(posicion) || self.casilleroVacio(posicion)
-
-	method todosPuedenPisarse(posicion) = game.getObjectsIn(posicion).all({ objeto => objeto.puedePisarse() })
-
-	method casilleroVacio(posicion) = game.getObjectsIn(posicion).isEmpty()
-
-	method proximaPosicion(dir) = dir.siguientePosicion(position)
-
-	method moverA(dir) {
-		const proximaPosicion = self.proximaPosicion(dir)
-		if (self.puedeMoverseA(proximaPosicion)) {
-			position = proximaPosicion
-		} else {
-			game.getObjectsIn(proximaPosicion).forEach({ objeto => objeto.moverA(dir)})
-		}
-	}
-
-}
-
 //class Personaje2 {
 //
 //	var property position = game.origin()
@@ -414,4 +287,3 @@ class Personaje2 {
 //	}
 //
 //}
-

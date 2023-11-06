@@ -13,12 +13,12 @@ object config {
 		game.title("UTN Fight")
 		game.boardGround("imageBackgroundMap.jpg")
 		plataformaUno.inicializar()
-		game.onCollideDo(plataformaUno, { elemento => game.say(plataformaUno, "¡Cuidado!")})
 	}
 
 	method agregarPersonajes() {
-		robertoMecanico.crear()
 		gordoMortero.crear()
+		robertoMecanico.crear()
+		
 	}
 
 	method configurarTeclado() {
@@ -42,8 +42,9 @@ object config {
 		
 		// ************ Configuracion teclado Gordo Montero ************
 		
+		
 		keyboard.up().onPressDo({ gordoMortero.moverA(arriba)
-			robertoMecanico.estaSaltando(true)
+			gordoMortero.estaSaltando(true)
 		})
 		keyboard.down().onPressDo({ gordoMortero.moverA(abajo)})
 		keyboard.left().onPressDo({ gordoMortero.moverA(izquierda)
@@ -52,7 +53,7 @@ object config {
 		keyboard.right().onPressDo({ gordoMortero.moverA(derecha)
 			gordoMortero.seMueveALaDerecha(true)
 		})
-		keyboard.space().onPressDo({ gordoMortero.pegar()})
+		keyboard.p().onPressDo({ gordoMortero.pegar()})
 		
 		// ************ Configuracion teclado Gordo Montero ************
 	}

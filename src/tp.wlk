@@ -10,10 +10,7 @@ object tpIntegrador {
 		config.configurarTablero()
 		imagenInicio.mostrar()
 		keyboard.enter().onPressDo{ self.iniciarPelea()}
-		
-		keyboard.enter().onPressDo{self.iniciarPelea()}
-		
-		
+		keyboard.enter().onPressDo{ self.iniciarPelea()}
 		game.start()
 	}
 
@@ -23,17 +20,25 @@ object tpIntegrador {
 		bordes.crear()
 		config.agregarPersonajes()
 		config.configurarTeclado()
-		game.onTick(30, "gravity", { robertoMecanico.actualizar()})
-		game.onTick(145, "animaciones", { robertoMecanico.animaciones()})
+		game.onTick(30, "gravity", { robertoMecanico.actualizar() gordoMortero.actualizar()})
+		game.onTick(145, "animaciones", { robertoMecanico.animaciones()
+			gordoMortero.animaciones()
+		})
+		const backgroundSound = game.sound("sounds/backgroundSound.mp3")
+		backgroundSound.shouldLoop(true)
+		game.schedule(500, { backgroundSound.play()})
 	}
 
 	method perder() {
 		game.clear()
-	// imagenPerdedora.mostrar()
+		game.sound("sounds/winnerSound.mp3").play()
+		if(robertoMecanico.vidas() == 0) {
+			game.addVisual(imagenGanadoraGordo)
+		}
+		else {
+			game.addVisual(imagenGanadoraRoberto)
+		}
 	}
 
 }
-
-
-
 
