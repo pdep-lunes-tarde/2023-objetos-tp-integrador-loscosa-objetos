@@ -48,6 +48,21 @@ class Personaje inherits Objeto {
 	
 	method pegar(_) {
 	}
+	
+	method moverIzquierda() {
+		self.moverA(izquierda)
+		self.seMueveALaIzquierda(true)
+	}
+	
+	method moverDerecha() {
+		self.moverA(derecha)
+		self.seMueveALaDerecha(true)
+	}
+	
+	method saltar() {
+		self.moverA(arriba)
+		self.estaSaltando(true)
+	}
 
 	method morir() = game.stop()
 
@@ -164,6 +179,7 @@ object gordoMortero inherits Personaje (position = game.at(18, 0)) {
 		} else {
 			"gordo_mortero/NeutralPosition_Left.png"
 		}
+	}
 
 	override method area() {
 		areaColision = (position.x() - 2 .. position.x() + 1)

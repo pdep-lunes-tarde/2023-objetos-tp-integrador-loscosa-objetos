@@ -23,39 +23,20 @@ object config {
 
 	method configurarTeclado() {
 		
-		// ************ Configuracion teclado Roberto el Mecanico ************
-		
-		keyboard.w().onPressDo({ robertoMecanico.moverA(arriba)
-			robertoMecanico.estaSaltando(true)
-		})
+	// ************ Configuracion teclado Roberto el Mecanico ************
+		keyboard.w().onPressDo({ robertoMecanico.saltar()})
 		keyboard.s().onPressDo({ robertoMecanico.moverA(abajo)})
-		keyboard.a().onPressDo({ robertoMecanico.moverA(izquierda)
-			robertoMecanico.seMueveALaIzquierda(true)
-		})
-		keyboard.d().onPressDo({ robertoMecanico.moverA(derecha)
-			robertoMecanico.seMueveALaDerecha(true)
-		})
+		keyboard.a().onPressDo({ robertoMecanico.moverIzquierda()})
+		keyboard.d().onPressDo({ robertoMecanico.moverDerecha()})
 		keyboard.space().onPressDo({ robertoMecanico.pegar()})
-		
-		// ************ Configuracion teclado Roberto el Mecanico ************
-		
-		
-		// ************ Configuracion teclado Gordo Montero ************
-		
-		
-		keyboard.up().onPressDo({ gordoMortero.moverA(arriba)
-			gordoMortero.estaSaltando(true)
-		})
+	// ************ Configuracion teclado Roberto el Mecanico ************
+	// ************ Configuracion teclado Gordo Montero ************
+		keyboard.up().onPressDo({ gordoMortero.saltar()})
 		keyboard.down().onPressDo({ gordoMortero.moverA(abajo)})
-		keyboard.left().onPressDo({ gordoMortero.moverA(izquierda)
-			gordoMortero.seMueveALaIzquierda(true)
-		})
-		keyboard.right().onPressDo({ gordoMortero.moverA(derecha)
-			gordoMortero.seMueveALaDerecha(true)
-		})
+		keyboard.left().onPressDo({ gordoMortero.moverIzquierda()})
+		keyboard.right().onPressDo({ gordoMortero.moverDerecha()})
 		keyboard.p().onPressDo({ gordoMortero.pegar()})
-		
-		// ************ Configuracion teclado Gordo Montero ************
+	// ************ Configuracion teclado Gordo Montero ************
 	}
 
 }
