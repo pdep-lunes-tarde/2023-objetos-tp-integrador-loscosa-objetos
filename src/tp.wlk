@@ -10,7 +10,6 @@ object tpIntegrador {
 		config.configurarTablero()
 		imagenInicio.mostrar()
 		keyboard.enter().onPressDo{ self.iniciarPelea()}
-		keyboard.enter().onPressDo{ self.iniciarPelea()}
 		game.start()
 	}
 
@@ -24,6 +23,8 @@ object tpIntegrador {
 		game.onTick(145, "animaciones", { robertoMecanico.animaciones()
 			gordoMortero.animaciones()
 		})
+		game.onTick(8000, "apareceMoneda",{bordes.aparecerMoneda()})
+		
 		const backgroundSound = game.sound("sounds/backgroundSound.mp3")
 		backgroundSound.shouldLoop(true)
 		game.schedule(500, { backgroundSound.play()})

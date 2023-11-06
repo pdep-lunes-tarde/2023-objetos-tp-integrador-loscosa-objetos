@@ -21,6 +21,12 @@ class Objeto {
 
 }
 
+class Moneda inherits Objeto{
+	var property valor
+
+	method image() = "burstCoin.png"
+	}
+
 class Personaje inherits Objeto {
 
 	var property estaSaltando = false

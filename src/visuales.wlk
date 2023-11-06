@@ -132,18 +132,20 @@ object bordes{
 		bordes.forEach({borde => borde.crear()})
 		robertoMecanicoVidas.crear()
 		gordoMorteroVidas.crear()
+		robertoMecanicoBurst.crear()
+		gordoMorteroBurst.crear()
 	}
 	
-//	method aparecerMoneda() {
-//		const x = (0..game.width()-1).anyOne()
-//		const y = (0..game.height()-1).anyOne()//asignamos una constante a cada insancia de moneda para poder controlar las instancias por separado
-//		 const ulti = new Moneda( valor = [1,5,10].anyOne(), position = game.at(x,y))
-//		game.addVisual(ulti)
-//		game.schedule(500,{ game.removeVisual(ulti)}) //como la constante "ulti" referencia a "Moneda", cuando removemos "ulti", removemos el objeto al que se referencia.
-//		
-//	}
+	method aparecerMoneda() {
+		const x = (0..game.width()-1).anyOne()
+		const y = (0..game.height()-1).anyOne()//asignamos una constante a cada insancia de moneda para poder controlar las instancias por separado
+		 const ulti = new Moneda( valor = [1,5,10].anyOne(), position = game.at(x,y))
+		game.addVisual(ulti)
+		game.schedule(3000,{ game.removeVisual(ulti)}) //como la constante "ulti" referencia a "Moneda", cuando removemos "ulti", removemos el objeto al que se referencia.
+		
+	}
 }
-
+	
 object robertoMecanicoVidas inherits Objeto (position = game.at(0,11))  {
 	
 	override method puedePisarse() = false
@@ -158,6 +160,16 @@ object gordoMorteroVidas inherits Objeto (position = game.at(16,11))  {
 	method image() = "gordo_mortero/vidasGordo-" + gordoMortero.vidas().toString() + "corazon.png"
 }
 
+object robertoMecanicoBurst inherits Objeto (position = game.at(0,10)) {
+	
+	override method puedePisarse() = false
+	method image()= "Ulti_Enabled.png"
+}
+object gordoMorteroBurst inherits Objeto (position = game.at(18,10)) {
+	
+	override method puedePisarse() = false
+	method image()= "Ulti_Enabled.png"
+}
 
 const imagenInicio = new Visual(image = "pantallaInicio.png")
 
