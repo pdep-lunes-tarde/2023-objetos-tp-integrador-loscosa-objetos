@@ -108,16 +108,24 @@ object robertoMecanico inherits Personaje (position = game.origin()) {
 	}
 
 	method image() {
+//Salto-----------------------------------------------------
 		return if (self.estaSaltando()) {
 			"roberto_mecanico/upPosition.png"
+//Movimiento------------------------------------------------			
 		} else if (self.seMueveALaDerecha()) {
 			"roberto_mecanico/rightPosition.png"
 		} else if (self.seMueveALaIzquierda()) {
 			"roberto_mecanico/leftPosition.png"
-		} else if (self.estaPegando()) {
-			"roberto_mecanico/fightPosition.png"
+//Golpe------------------------------------------------------
+		} else if (self.estaPegando() && (self.position().x() > gordoMortero.position().x())) {
+			"roberto_mecanico/fightPosition_Right.png"
+		} else if (self.estaPegando() && (self.position().x() < gordoMortero.position().x())) {
+			"roberto_mecanico/fightPosition_Left.png"
+//Posición neutral--------------------------------------------
+		} else if ((self.position().x() > gordoMortero.position().x())){
+			"roberto_mecanico/NeutralPosition_Right.png" 
 		} else {
-			"roberto_mecanico/originalPosition.png"
+			"roberto_mecanico/NeutralPosition_Left.png"
 		}
 	}
 
@@ -150,12 +158,16 @@ object gordoMortero inherits Personaje (position = game.at(18, 0)) {
 			"gordo_mortero/rightPosition.png"
 		} else if (self.seMueveALaIzquierda()) {
 			"gordo_mortero/leftPosition.png"
-		} else if (self.estaPegando()) {
-			"gordo_mortero/fightPosition.png"
+		} else if (self.estaPegando() && (self.position().x() > robertoMecanico.position().x())) {
+			"gordo_mortero/fightPosition_Right.png"
+		} else if (self.estaPegando() && (self.position().x() < robertoMecanico.position().x())) {
+			"gordo_mortero/fightPosition_Left.png"
+//Posición neutral--------------------------------------------
+		} else if ((self.position().x() > robertoMecanico.position().x())){
+			"gordo_mortero/NeutralPosition_Right.png" 
 		} else {
-			"gordo_mortero/originalPosition.png"
+			"gordo_mortero/NeutralPosition_Left.png"
 		}
-	}
 
 	override method area() {
 		areaColision = (position.x() - 2 .. position.x() + 1)
