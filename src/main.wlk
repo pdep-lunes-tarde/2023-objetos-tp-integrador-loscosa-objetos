@@ -21,9 +21,17 @@ class Objeto {
 
 }
 
-class ObjetoMovible inherits Objeto {
+class Personaje inherits Objeto {
 
-	override method moverA(dir) {
+	var property estaSaltando = false
+	var property seMueveALaDerecha = false
+	var property seMueveALaIzquierda = false
+	var property estaPegando = false
+	var areaColision = 1
+	;
+	var property vidas = 6
+	
+		override method moverA(dir) {
 		const proximaPosicion = self.proximaPosicion(dir)
 		if (self.puedeMoverseA(proximaPosicion)) {
 			position = proximaPosicion
@@ -37,19 +45,7 @@ class ObjetoMovible inherits Objeto {
 	method casilleroVacio(posicion) = game.getObjectsIn(posicion).isEmpty()
 
 	method proximaPosicion(dir) = dir.siguientePosicion(position)
-
-}
-
-class Personaje inherits ObjetoMovible {
-
-	var property estaSaltando = false
-	var property seMueveALaDerecha = false
-	var property seMueveALaIzquierda = false
-	var property estaPegando = false
-	var areaColision = 1
-	;
-	var property vidas = 6
-
+	
 	method pegar(_) {
 	}
 
