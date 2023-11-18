@@ -1,18 +1,16 @@
 import wollok.game.*
-import plataforma.*
 import main.*
 import direcciones.*
+import visuales.*
 
 object config {
 
 	method configurarTablero() {
-		const plataformaUno = new Plataforma()
 		game.width(20)
 		game.height(12)
 		game.cellSize(50)
 		game.title("UTN Fight")
 		game.boardGround("imageBackgroundMap.jpg")
-		plataformaUno.inicializar()
 	}
 
 	method agregarPersonajes() {
@@ -30,6 +28,7 @@ object config {
 		keyboard.d().onPressDo({ robertoMecanico.moverDerecha()})
 		keyboard.space().onPressDo({ robertoMecanico.pegar()})
 	// ************ Configuracion teclado Roberto el Mecanico ************
+	
 	// ************ Configuracion teclado Gordo Montero ************
 		keyboard.up().onPressDo({ gordoMortero.saltar()})
 		keyboard.down().onPressDo({ gordoMortero.moverA(abajo)})
