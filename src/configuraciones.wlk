@@ -16,25 +16,24 @@ object config {
 	method agregarPersonajes() {
 		gordoMortero.crear()
 		robertoMecanico.crear()
-		
 	}
 
 	method configurarTeclado() {
-		
-	// ************ Configuracion teclado Roberto el Mecanico ************
+		// ************ Configuracion teclado Roberto el Mecanico ************
 		keyboard.w().onPressDo({ robertoMecanico.saltar()})
 		keyboard.s().onPressDo({ robertoMecanico.moverA(abajo)})
 		keyboard.a().onPressDo({ robertoMecanico.moverIzquierda()})
 		keyboard.d().onPressDo({ robertoMecanico.moverDerecha()})
 		keyboard.space().onPressDo({ robertoMecanico.pegar()})
-	// ************ Configuracion teclado Roberto el Mecanico ************
-	
-	// ************ Configuracion teclado Gordo Montero ************
+		keyboard.c().onPressDo({ robertoMecanico.activarUlti(robertoMecanico.danioAleatorio())})
+			// ************ Configuracion teclado Roberto el Mecanico ************
+			// ************ Configuracion teclado Gordo Montero ************
 		keyboard.up().onPressDo({ gordoMortero.saltar()})
 		keyboard.down().onPressDo({ gordoMortero.moverA(abajo)})
 		keyboard.left().onPressDo({ gordoMortero.moverIzquierda()})
 		keyboard.right().onPressDo({ gordoMortero.moverDerecha()})
 		keyboard.p().onPressDo({ gordoMortero.pegar()})
+		keyboard.l().onPressDo({gordoMortero.activarUlti(gordoMortero.danioAleatorio())})
 	// ************ Configuracion teclado Gordo Montero ************
 	}
 

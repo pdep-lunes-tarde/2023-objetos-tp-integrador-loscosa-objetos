@@ -30,8 +30,9 @@ class Personaje inherits Objeto {
 	var property seMueveALaIzquierda = false
 	var property estaPegando = false
 	var property areaColision = 1
-	var property vidas = 6
+	var property vidas = 6.max(0)
 	var property mana = 1.min(100)
+	var property danio = 1
 
 	override method moverA(dir) {
 		const proximaPosicion = self.proximaPosicion(dir)
@@ -70,9 +71,6 @@ class Personaje inherits Objeto {
 
 	method proximaPosicion(dir) = dir.siguientePosicion(position)
 
-	method pegar(_) {
-	}
-
 	method moverIzquierda() {
 		self.moverA(izquierda)
 		self.seMueveALaIzquierda(true)
@@ -110,9 +108,9 @@ class Personaje inherits Objeto {
 		}
 	}
 
-	method perderVida() {
-		if (vidas == 0) tpIntegrador.perder() else {
-			vidas -= 1
+	method perderVida(danioRecibido) {
+		if (vidas <= 0) tpIntegrador.perder() else {
+			vidas -= danioRecibido
 		}
 	}
 
@@ -120,7 +118,7 @@ class Personaje inherits Objeto {
 		estaPegando = true
 		self.area()
 		if (self.areaColision().contains(personajeEnemigo.position().x())) {
-			personajeEnemigo.perderVida()
+			personajeEnemigo.perderVida(self.danio())
 		}
 		game.sound("sounds/fightSound.mp3").play()
 	}
@@ -149,7 +147,19 @@ class Personaje inherits Objeto {
 	method aumentarMana(nuevoValor) {
 		mana += nuevoValor
 	}
-
+	
+	method danioAleatorio() {
+		return [1,2,3,4,5].anyOne()	
+	}
+	
+	method activarUlti(_numero) {
+		if(self.mana() >= 100) {
+			danio = _numero
+		} else {
+			danio = 1
+		}
+	}
+	
 }
 
 object robertoMecanico inherits Personaje (position = game.origin(), nombrePersonaje = "roberto_mecanico", personajeEnemigo = gordoMortero) {
@@ -186,12 +196,4 @@ class Moneda inherits Objeto {
 
 }
 
-object auto inherits Objeto (position= game.origin()) {
-	
-	method image() = "roberto_mecanico/ulti.png"
-	
-	method  arroyar() {
-		
-	}
-}
 
