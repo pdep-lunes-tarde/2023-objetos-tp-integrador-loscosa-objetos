@@ -1,75 +1,56 @@
 import wollok.game.*
+import visuales.*
+import configuraciones.*
+import main.*
 
 object tpIntegrador {
-	method jugar() {
-		tablero.setearTablero()
-		game.boardGround("background.jpg")
-		game.addVisual(personaje)
-		game.onTick(14,"gravity",{personaje.actualizar()})		
-		keyboard.d().onPressDo { personaje.moverDerecha() }
-		keyboard.w().onPressDo { 
-			game.onTick(10,"jump",{ personaje.subir() })
-			game.schedule(210, { game.removeTickEvent("jump") })
-		}
-		keyboard.a().onPressDo { personaje.moverIzquierda() }
-		keyboard.s().onPressDo { personaje.bajar() }
+
+	method iniciar() {
+		config.configurarTablero()
+		imagenInicio.mostrar()
+		keyboard.enter().onPressDo{ self.iniciarPelea()}
 		game.start()
 	}
+
+	method iniciarPelea() {
+		game.clear()
+		plataformaCentral.crear()
+		bordes.agregarBordes()
+		bordes.crearVisuales()
+		config.agregarPersonajes()
+		config.configurarTeclado()
+		self.timers()
+	}
+
+	method perder() {
+		game.clear()
+		game.sound("sounds/winnerSound.mp3").play()
+		if (robertoMecanico.vidas() <= 0) {
+			game.addVisual(imagenGanadoraGordo)
+		} else {
+			game.addVisual(imagenGanadoraRoberto)
+		}
+	}
+
+	method timers() {
+		game.onTick(30, "gravity", { robertoMecanico.actualizar()
+			gordoMortero.actualizar()
+		})
+		game.onTick(145, "animaciones", { robertoMecanico.animaciones()
+			gordoMortero.animaciones()
+		})
+		game.onTick(300, "monedas", { bordes.aparecerMoneda()
+			gordoMortero.cargarUlti()
+			robertoMecanico.cargarUlti()
+		})
+		game.onTick(50, "ultis", { ultiRoberto.image()
+			ultiGordo.image()
+		})
+		game.schedule(5000, { game.removeTickEvent("monedas")})
+		const backgroundSound = game.sound("sounds/backgroundSound.mp3")
+		backgroundSound.shouldLoop(true)
+		game.schedule(500, { backgroundSound.play()})
+	}
+
 }
 
-object tablero {
-	
-	method setearTablero(){
-		game.width(20)
-		game.height(12)
-		game.cellSize(50)
-		game.title("UTN Fight")
-	}
-}
-
-object personaje {
-	var property position = game.origin()
-	var verticalSpeed = 0	
-	
-	method image() = "personaje.png";
-	
-	method subir(){
-		position = position.up(1)
-		
-	}
-	method bajar(){
-		position = game.at(position.x(), (position.y() - 1).max(0))
-	}
-	method moverIzquierda() {
-		position = game.at((position.x() - 1).max(0), position.y())
-	}
-	method moverDerecha(){
-		position = game.at((position.x() + 1).min(18), position.y())
-	}
-	
-	
-	
-	method saltar() {
-        verticalSpeed = 10  
-    }
-
-    method actualizar() {
-        position = game.at(position.x(), position.y() - verticalSpeed)
-
-        if (position.y() < 10) { 
-            verticalSpeed = 0
-            position = game.at(position.x(), 0) 
-        } else {
-            verticalSpeed -= 0.1 
-        }
-    }
-	
-	
-
-	
-}
-/*
- * object plataforma {
-	method image () =
- * 
- */
