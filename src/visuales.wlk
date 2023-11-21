@@ -74,8 +74,8 @@ object bordes {
 
 	method aparecerMoneda() {
 		const x = (0 .. game.width() - 5).anyOne()
-		const y = (0 .. game.height() - 5).anyOne() // asignamos una constante a cada insancia de moneda para poder controlar las instancias por separado
-		const moneda = new Moneda(valor = [ 100, 50, 25 ].anyOne(), position = game.at(x, y))
+		const y = (0 .. game.height() - 5).anyOne()
+		const moneda = new Moneda(valor = [ 15, 35, 45 ].anyOne(), position = game.at(x, y))
 		game.addVisual(moneda)
 	}
 
@@ -85,7 +85,13 @@ object robertoMecanicoVidas inherits Objeto (position = game.at(0, 11)) {
 
 	override method puedePisarse() = false
 
-	method image() = "roberto_mecanico/vidasRoberto-" + robertoMecanico.vidas().toString() + "corazon.png"
+	method image() {
+		if (robertoMecanico.vidas() <= 0) {
+			return "critico.png"
+		} else {
+			return "roberto_mecanico/vidasRoberto-" + robertoMecanico.vidas().toString() + "corazon.png"
+		}
+	}
 
 }
 
@@ -93,7 +99,13 @@ object gordoMorteroVidas inherits Objeto (position = game.at(16, 11)) {
 
 	override method puedePisarse() = false
 
-	method image() = "gordo_mortero/vidasGordo-" + gordoMortero.vidas().toString() + "corazon.png"
+	method image() {
+		if (gordoMortero.vidas() <= 0) {
+			return "critico.png"
+		} else {
+			return "gordo_mortero/vidasGordo-" + gordoMortero.vidas().toString() + "corazon.png"
+		}
+	}
 
 }
 

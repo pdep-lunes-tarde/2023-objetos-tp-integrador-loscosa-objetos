@@ -30,7 +30,7 @@ class Personaje inherits Objeto {
 	var property seMueveALaIzquierda = false
 	var property estaPegando = false
 	var property areaColision = 1
-	var property vidas = 6.max(0)
+	var property vidas = 6
 	var property mana = 1.min(100)
 	var property danio = 1
 
@@ -134,10 +134,9 @@ class Personaje inherits Objeto {
 		estaPegando = false
 	}
 
-
 	method cargarUlti() {
-		game.onCollideDo(self , { moneda =>
-			if(gordoMortero.position().x() != robertoMecanico.position().x()) {
+		game.onCollideDo(self, { moneda =>
+			if (gordoMortero.position().x() != robertoMecanico.position().x()) {
 				moneda.esAgarradaPor(self)
 				game.removeVisual(moneda)
 			}
@@ -147,19 +146,19 @@ class Personaje inherits Objeto {
 	method aumentarMana(nuevoValor) {
 		mana += nuevoValor
 	}
-	
+
 	method danioAleatorio() {
-		return [1,2,3,4,5].anyOne()	
+		return [ 2, 3 ].anyOne()
 	}
-	
+
 	method activarUlti(_numero) {
-		if(self.mana() >= 100) {
+		if (self.mana() >= 100) {
 			danio = _numero
 		} else {
 			danio = 1
 		}
 	}
-	
+
 }
 
 object robertoMecanico inherits Personaje (position = game.origin(), nombrePersonaje = "roberto_mecanico", personajeEnemigo = gordoMortero) {
@@ -195,5 +194,4 @@ class Moneda inherits Objeto {
 	}
 
 }
-
 

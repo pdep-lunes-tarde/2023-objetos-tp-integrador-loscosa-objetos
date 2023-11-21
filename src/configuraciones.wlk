@@ -33,7 +33,7 @@ object config {
 		keyboard.left().onPressDo({ gordoMortero.moverIzquierda()})
 		keyboard.right().onPressDo({ gordoMortero.moverDerecha()})
 		keyboard.p().onPressDo({ gordoMortero.pegar()})
-		keyboard.l().onPressDo({gordoMortero.activarUlti(gordoMortero.danioAleatorio())})
+		keyboard.l().onPressDo({ gordoMortero.activarUlti(gordoMortero.danioAleatorio())})
 	// ************ Configuracion teclado Gordo Montero ************
 	}
 

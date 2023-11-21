@@ -25,7 +25,7 @@ object tpIntegrador {
 	method perder() {
 		game.clear()
 		game.sound("sounds/winnerSound.mp3").play()
-		if (robertoMecanico.vidas() == 0) {
+		if (robertoMecanico.vidas() <= 0) {
 			game.addVisual(imagenGanadoraGordo)
 		} else {
 			game.addVisual(imagenGanadoraRoberto)
@@ -42,10 +42,8 @@ object tpIntegrador {
 		game.onTick(300, "monedas", { bordes.aparecerMoneda()
 			gordoMortero.cargarUlti()
 			robertoMecanico.cargarUlti()
-			console.println(robertoMecanico.mana())
 		})
-		game.onTick(50, "ultis", { 
-			ultiRoberto.image()
+		game.onTick(50, "ultis", { ultiRoberto.image()
 			ultiGordo.image()
 		})
 		game.schedule(5000, { game.removeTickEvent("monedas")})
